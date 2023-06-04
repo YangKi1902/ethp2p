@@ -1,6 +1,6 @@
 use anvil_core::eth::{
     block::{Block, Header},
-    transaction::TypedTransaction,
+    transaction::MaybeImpersonatedTransaction,
 };
 use open_fastrlp::{
     Decodable, Encodable, RlpDecodable, RlpDecodableWrapper, RlpEncodable, RlpEncodableWrapper,
