@@ -112,7 +112,7 @@ impl From<Vec<[u8; 32]>> for GetBlockBodies {
 /// A response to [`GetBlockBodies`], containing bodies if any bodies were found.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, RlpEncodable, RlpDecodable)]
 pub struct BlockBody {
-    pub transactions: Vec<TypedTransaction>,
+    pub transactions: Vec<MaybeImpersonatedTransaction>,
     pub ommers: Vec<Header>,
 }
 
@@ -147,7 +147,7 @@ mod test {
 
     use anvil_core::eth::{
         block::Header,
-        transaction::{LegacyTransaction, TransactionKind, TypedTransaction},
+        transaction::{LegacyTransaction, TransactionKind, MaybeImpersonatedTransaction},
     };
     use ethers::core::types::{Bytes, Signature, H64, U256};
     use hex_literal::hex;
@@ -389,7 +389,7 @@ mod test {
             message: BlockBodies(vec![
                 BlockBody {
                     transactions: vec![
-                        TypedTransaction::Legacy(LegacyTransaction {
+                        MaybeImpersonatedTransaction::Legacy(LegacyTransaction {
                             nonce: 0x8u64.into(),
                             gas_price: 0x4a817c808u64.into(),
                             gas_limit: 0x2e248u64.into(),
@@ -402,7 +402,7 @@ mod test {
                                 s: U256::from_str("64b1702d9298fee62dfeccc57d322a463ad55ca201256d01f62b45b2e1c21c10").unwrap(),
                             }
                         }),
-                        TypedTransaction::Legacy(LegacyTransaction {
+                        MaybeImpersonatedTransaction::Legacy(LegacyTransaction {
                             nonce: 0x9u64.into(),
                             gas_price: 0x4a817c809u64.into(),
                             gas_limit: 0x33450u64.into(),
@@ -452,7 +452,7 @@ mod test {
             message: BlockBodies(vec![
                 BlockBody {
                     transactions: vec![
-                        TypedTransaction::Legacy(LegacyTransaction {
+                        MaybeImpersonatedTransaction::Legacy(LegacyTransaction {
                             nonce: 0x8u64.into(),
                             gas_price: 0x4a817c808u64.into(),
                             gas_limit: 0x2e248u64.into(),
@@ -465,7 +465,7 @@ mod test {
                                 s: U256::from_str("64b1702d9298fee62dfeccc57d322a463ad55ca201256d01f62b45b2e1c21c10").unwrap(),
                             }
                         }),
-                        TypedTransaction::Legacy(LegacyTransaction {
+                        MaybeImpersonatedTransaction::Legacy(LegacyTransaction {
                             nonce: 0x9u64.into(),
                             gas_price: 0x4a817c809u64.into(),
                             gas_limit: 0x33450u64.into(),
